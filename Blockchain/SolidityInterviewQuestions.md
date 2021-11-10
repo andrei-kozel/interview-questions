@@ -38,5 +38,50 @@ In this article you will find a lot of questions to prepare your Solidity job in
 > ##### What is the typical layout of a Solidity smart contract?
 > First, we need to put a pragma statement to indicate to the Solidity compiler which version of solidity we want to use. This is for avoiding mistakes where you write a smart contract for one version of solidity but accidentally use another version when you compile.
 
+> #### What are the 4 function access modifiers in solidity?
+> Public, private, internal, external.
+
 ### Intermediate <span id="Intermediate"><span>
+
+> #### How many bytes does EVM use to store data?
+> EVM handles storing data in 32 bytes
+
+
+
+
+> #### 
+> 
+
+> #### 
+> 
+
 ### Difficult <span id="Difficult"><span>
+
+> #### How did the DAO hack happen? How can you avoid doing the same thing in your contract?
+> Reentry using a proxy contract where the default payable fallback recalls the withdraw function. A re-entrancy attack happen when a contract A calls a contract B which call back the calling function on contract A to perform some malicious effect. Example with a DAO-like attack:
+>
+>Solve it by updating balances before executing the withdraw and checking the return values of ether transfer. Use transfer over send, as transfer reverts.
+>
+> ```solidity
+> contract A {
+>   //...
+>   function pay(address payable to, uint amount) external {
+>     if(amount <= balances[msg.sender]) {
+>       B(to).badFunction().send(amount);
+>       balances[msg.sender] -= amount;
+>   }
+> }
+> contract B {
+>   address
+>   function badFunction(address payable to) external {
+>     ContractA(msg.sender).pay();
+>   }
+> }
+> ``` 
+
+
+
+
+> #### Explain how a contract can be upgraded after deployed?
+> 
+
